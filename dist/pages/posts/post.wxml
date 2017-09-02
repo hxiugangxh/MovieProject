@@ -1,5 +1,5 @@
 
-  <view class="classname">
+  <view>
     <swiper indicator-dots="true" autoplay="true" interval="5000">
       <swiper-item>
         <image src="/images/wx.png"/>
@@ -13,7 +13,7 @@
     </swiper>
 
     <block wx:for="{{postList}}" wx:for-index="index" wx:for-item="post" wx:key="key">
-      <view catchtap="onPostTap">
+      <view catchtap="onPostTap" data-wepy-params-a="{{post.postId}}">
         
   <view class="post-container">
     <view class="post-author-date">

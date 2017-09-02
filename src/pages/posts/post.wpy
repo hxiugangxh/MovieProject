@@ -13,7 +13,7 @@
 
 </style>
 <template>
-  <view class="classname">
+  <view>
     <swiper indicator-dots="true" autoplay="true" interval="5000">
       <swiper-item>
         <image src="/images/wx.png"></image>
@@ -27,7 +27,7 @@
     </swiper>
 
     <repeat for="{{postList}}" item="post" index="index">
-      <view @tap.stop="onPostTap">
+      <view @tap.stop="onPostTap({{post.postId}})">
         <postItemTemplate id="postItemTemplate" :post="post" :index="index"></postItemTemplate>
       </view>
     </repeat>
@@ -50,15 +50,15 @@
       postList: []
     }
     methods = {
-      onPostTap() {
-        console.log('button clicked')
+      onPostTap(postId) {
+        wepy.navigateTo({
+          url: 'post-detail/post-detail?id=' + postId
+        })
       }
     }
 
     onLoad() {
       this.postList = postData.postList
-      console.log(this.postList)
-      console.log('onLoad')
     }
   }
 </script>
