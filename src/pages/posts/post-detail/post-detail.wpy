@@ -40,7 +40,7 @@
       postData: {}
     }
 
-    dealBackgroundMusic () {
+    dealBackgroundMusic() {
       let isPlayingMusic = this.isPlayingMusic
       isPlayingMusic = !isPlayingMusic
       this.isPlayingMusic = isPlayingMusic
@@ -81,6 +81,26 @@
         this.$apply()
 
         wepy.setStorageSync('posts_collected', postsCollected)
+      },
+      onShareTap() {
+        let itemList = [
+          '分享给微信好友',
+          '分享到朋友圈',
+          '分享到QQ',
+          '分享到微博'
+        ]
+        wepy.showActionSheet({
+          itemList: itemList,
+          itemColor: '#405f80',
+          success: function (res) {
+            // res.cancel 用户是不是点击了取消按钮
+            // res.tapIndex 数组元素的序号，从0开始
+            wepy.showModal({
+              title: '用户' + ((itemList[res.tapIndex]) ? itemList[res.tapIndex] : '取消'),
+              content: '用户是否取消？' + res.cancel + '现在无法实现分享功能，什么时候能支持呢'
+            })
+          }
+        })
       }
     }
 
@@ -98,7 +118,6 @@
         postsCollected[postId] = false
         wepy.setStorageSync('posts_collected', postsCollected)
       }
-      console.log(`this.collected ${this.collected}`)
 
       let postData = this.postData
 
