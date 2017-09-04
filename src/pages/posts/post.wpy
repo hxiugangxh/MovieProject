@@ -57,7 +57,7 @@
       }
     }
 
-    onLoad() {
+    async onLoad() {
       this.postList = postData.postList
     }
   }
